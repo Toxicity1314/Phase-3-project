@@ -9,7 +9,13 @@ class ApplicationController < Sinatra::Base
 
   get "/restaurants/:id" do
     restaurant = Restaurant.find(params[:id])
-    restaurant.to_json(include: {menus: {include: {food_items:{}}}})
+    restaurant.menus.to_json
+    # restaurant.to_json(include: {menus: {include: {food_items:{}}}})
+  end
+
+  get "/menu/:id" do
+    menu = Menu.find(params[:id])
+    menu.food_items.to_json
   end
 
 end

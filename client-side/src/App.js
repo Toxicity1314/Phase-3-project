@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 import NavBar from "./components/NavBar"
 import Home from "./components/Home"
+import MenuPage from './components/MenuPage';
+import RestaurantPage from './components/RestaurantPage';
+
 import './App.css';
 
 function App() {
@@ -15,6 +18,14 @@ function App() {
         <Route 
           exact path='/'
           element={<Home/>}
+        />
+        <Route
+          path="/restaurants/:id"
+          element={<RestaurantPage/>}
+          />
+        <Route
+          path="/menu/:id"
+          element={<MenuPage/>}
         />
       </Routes>
     </div>
