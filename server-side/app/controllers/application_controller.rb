@@ -1,3 +1,5 @@
+require 'pry'
+
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
@@ -16,6 +18,16 @@ class ApplicationController < Sinatra::Base
   get "/menu/:id" do
     menu = Menu.find(params[:id])
     menu.food_items.to_json
+  end
+
+  patch '/food/:id' do
+    food = FoodItem.find(params[:id])
+    food.update(
+      name: params[:name],
+      description: params[:description],
+      price: params[:price]
+    )
+    food.to_json
   end
 
 end
