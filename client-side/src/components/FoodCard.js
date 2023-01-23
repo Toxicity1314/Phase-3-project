@@ -1,13 +1,32 @@
-import React from 'react'
-import { Card } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Card, Button } from 'semantic-ui-react'
 import { NavLink, Link } from "react-router-dom";
+import EditFood from './EditFood'
 
-function FoodCard( { food }) {
- 
+function FoodCard( { food, updateFoodItems }) {
+    
+    const [isEditable, setIsEditable] = useState(false)
+
+    const editFood = () => {
+        setIsEditable(!isEditable)
+    }
+
     return (
     <Card>
         <Card.Content>
-            <Card.Header >{food.name}</Card.Header>
+            {isEditable ? 
+            
+            <EditFood food={food} updateFoodItems={updateFoodItems} setIsEditable={setIsEditable}/>
+            : 
+            <><Card.Header >{food.name}</Card.Header>
+            <Card.Meta>
+                <span className='desc'>{food.description}</span>
+            </Card.Meta>
+            <Card.Content extra>
+                <p>Price: ${food.price}</p>
+            </Card.Content></>
+            }
+            <Button onClick={editFood}>{isEditable ? "Cancel" : "Edit Food"}</Button>
         </Card.Content>
     </Card>
     )
