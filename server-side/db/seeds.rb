@@ -16,8 +16,10 @@ FoodItem.destroy_all
         description = Faker::Food.description
         price = rand(1..100)
         menu = array[rand(array.length)] 
+        food_course_array = ['appetizer','entree','dessert']
+        food_course = food_course_array[rand(food_course_array.length)]
         
-        FoodItem.create(name: name ,price: price , description: description , menu: menu)
+        FoodItem.create(name: name ,price: price , description: description , menu: menu, food_course: food_course)
     end
 end
 
