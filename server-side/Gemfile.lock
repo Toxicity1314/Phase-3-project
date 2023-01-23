@@ -14,6 +14,8 @@ GEM
       zeitwerk (~> 2.3)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
+    faker (2.18.0)
+      i18n (>= 1.6, < 2)
     ffi (1.15.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -62,6 +64,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  faker
   pry
   rack-contrib
   rack-cors
