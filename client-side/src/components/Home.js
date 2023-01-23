@@ -14,8 +14,10 @@ function Home() {
     }, [])
 
     const restaurantCards = restaurants.map(restaurant => {
-        <RestaurantCard restaurant={restaurant}/>
+       return (<RestaurantCard key={restaurant.id} restaurant={restaurant}/>)
     })
+
+
 
     console.log(restaurantCards)
     
