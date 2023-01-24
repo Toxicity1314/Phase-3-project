@@ -11,7 +11,8 @@ class ApplicationController < Sinatra::Base
 
   get "/restaurants/:id" do
     restaurant = Restaurant.find(params[:id])
-    restaurant.menus.to_json
+    ordered = restaurant.menus.order(:id).uniq
+    ordered.to_json
     # restaurant.to_json(include: {menus: {include: {food_items:{}}}})
   end
 
@@ -42,7 +43,8 @@ class ApplicationController < Sinatra::Base
       description: params[:description],
       price: params[:price],
       food_course: params[:food_course],
-      menu_id: params[:menu_id]
+      menu_id: params[:menu_id],
+      restaurant_id: params[:restaurant_id]
     )
     food.to_json
   end

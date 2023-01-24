@@ -1,4 +1,4 @@
 class Restaurant < ActiveRecord::Base
-    has_many :menus
-    has_many :food_items, through: :menus
+    has_many :food_items
+    has_many :menus, through: :food_items
 end
