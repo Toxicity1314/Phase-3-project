@@ -13,10 +13,7 @@ function RestaurantPage( {foodItems, setfoodItems}) {
   }, []);
 
   const addFood = (newlyAddedFood) => {
-    console.log(newlyAddedFood)
-    const updatedFoods = foodItems.push(newlyAddedFood)
-    console.log(updatedFoods)
-    // setfoodItems(updatedFoods)
+    setfoodItems([...foodItems,newlyAddedFood])
   }
 
   const menuCards = menu.map((menu) => {

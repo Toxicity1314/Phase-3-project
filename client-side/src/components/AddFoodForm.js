@@ -11,11 +11,6 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
         menu_id: menu.id
       });
 
-      const options = [
-        {key: 'a', text: 'appetizer', value: 'appetizer'},
-        {key: 'e', text: 'entree', value: 'entree'},
-        {key: 'd', text: 'dessert', value: 'dessert'}
-      ]
 
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,13 +29,10 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
       }
 
       const handleChange = (e) => {
+        console.log(e.target.value)
         let { name, value } = e.target;
         if (name == "price") {
             value = parseFloat(value);
-        }
-        if (e.target.className === "item") {
-            name = "food_course"
-            value = e.target.textContent
         }
         setAddFoodForm({ ...addFoodForm, [name]: value });
       }
@@ -58,14 +50,13 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
                 value={addFoodForm.description}
                 onChange={handleChange}
             />
-            <Form.Select
-                fluid
-                label='Course'
-                name='course'
-                options={options}
-                placeholder='Course'
-                onChange={handleChange}
-            />
+            <label>Choose a course</label>
+            <select name="food_course" onChange={handleChange}>
+                <option value="">--Please choose an option--</option>
+                <option value="appetizer">appetizer</option>
+                <option value="entree">entree</option>
+                <option value="dessert">dessert</option>
+            </select>
             <Form.Field>
                 <label>Price</label>
                 <input
