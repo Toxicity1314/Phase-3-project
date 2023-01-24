@@ -7,8 +7,10 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
         name: "",
         description: "",
         price: 0,
+        food_course: "",
         menu_id: menu.id
       });
+
 
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,13 +29,15 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
       }
 
       const handleChange = (e) => {
+        console.log(e.target.value)
         let { name, value } = e.target;
         if (name == "price") {
             value = parseFloat(value);
-            }
+        }
         setAddFoodForm({ ...addFoodForm, [name]: value });
       }
-    
+      console.log(addFoodForm)
+
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Field>
@@ -46,6 +50,13 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
                 value={addFoodForm.description}
                 onChange={handleChange}
             />
+            <label>Choose a course</label>
+            <select name="food_course" onChange={handleChange}>
+                <option value="">--Please choose an option--</option>
+                <option value="appetizer">appetizer</option>
+                <option value="entree">entree</option>
+                <option value="dessert">dessert</option>
+            </select>
             <Form.Field>
                 <label>Price</label>
                 <input

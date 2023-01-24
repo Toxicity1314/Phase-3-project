@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MenuCard from "./MenuCard";
 
-function RestaurantPage() {
+function RestaurantPage( {foodItems, setfoodItems, setNavBarName}) {
   const { id } = useParams();
   const [menu, setMenu] = useState([]);
-  const [foodItems, setfoodItems] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:9292/restaurants/${id}`)
@@ -14,8 +13,7 @@ function RestaurantPage() {
   }, []);
 
   const addFood = (newlyAddedFood) => {
-    const updatedFoods = foodItems.push(newlyAddedFood)
-    setfoodItems(updatedFoods)
+    setfoodItems([...foodItems,newlyAddedFood])
   }
 
   const menuCards = menu.map((menu) => {

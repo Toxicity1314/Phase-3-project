@@ -2,11 +2,14 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 import { NavLink, Link } from "react-router-dom";
 
-function RestaurantCard({ restaurant }) {
+function RestaurantCard({ restaurant, handleNavBar }) {
   return (
     <Card>
       <Card.Content>
-        <Card.Header as={NavLink} to={`/restaurants/${restaurant.id}`}>
+        <Card.Header 
+          as={NavLink}
+          to={`/restaurants/${restaurant.id}`}
+          onClick={()=>handleNavBar(restaurant.name)}>
           {restaurant.name}
         </Card.Header>
       </Card.Content>
