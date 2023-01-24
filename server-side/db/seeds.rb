@@ -24,7 +24,14 @@ FoodItem.destroy_all
 end
 
 
-
+sedona = Restaurant.create(name: "Sedona Taphouse")
+lunch = Menu.create(time_of_day: "lunch", restaurant: sedona)
+FoodItem.create(name: "House Made Soup" ,price: 4.9 , description: "Tomato Basil New Endland Clam Chowder" , menu: lunch, food_course: "appetizer")
+FoodItem.create(name: "Hummus Duo" ,price: 9.9 , description: "Classic and red pepper hummas with feta, cucumbers and flatbread" , menu: lunch, food_course: "appetizer")
+FoodItem.create(name: "Southwest Steak Taco" ,price: 13 , description: "Seasoned tender steak, black bean salsa, sauteed onions, chipotle aoili, cheddar chees, fresh pico, cilantro. with greens" , menu: lunch, food_course: "entree")
+FoodItem.create(name: "Grilled Chicken" ,price: 20.9 , description: "8oz Side of BBQ Choice of two house made sides" , menu: lunch, food_course: "entree")
+FoodItem.create(name: "Strawberry Cheesecake" ,price: 8 , description: "Strawberry Cheesecake...." , menu: lunch, food_course: "dessert")
+FoodItem.create(name: "Chocolate lava cake" ,price: 9 , description: "chocolate lava cake" , menu: lunch, food_course: "dessert")
 
 
 
