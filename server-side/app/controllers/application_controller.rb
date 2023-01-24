@@ -41,6 +41,7 @@ class ApplicationController < Sinatra::Base
       name: params[:name],
       description: params[:description],
       price: params[:price],
+      food_course: params[:food_course],
       menu_id: params[:menu_id]
     )
     food.to_json

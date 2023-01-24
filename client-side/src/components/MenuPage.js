@@ -35,6 +35,8 @@ function MenuPage({foodItems, setfoodItems}) {
   const entrees = [];
   const desserts = [];
 
+  console.log(foodItems)
+
   const sortFoodsByCourse = () => {
     let arrayToUpdate
 

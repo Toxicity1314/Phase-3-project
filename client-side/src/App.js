@@ -9,7 +9,7 @@ import RestaurantPage from './components/RestaurantPage';
 import './App.css';
 
 function App() {
-  
+  const [foodItems, setfoodItems] = useState([]);
 
   return (
     <div className="App">
@@ -21,11 +21,11 @@ function App() {
         />
         <Route
           path="/restaurants/:id"
-          element={<RestaurantPage/>}
+          element={<RestaurantPage foodItems={foodItems} setfoodItems={setfoodItems}/>}
           />
         <Route
           path="/menu/:id"
-          element={<MenuPage/>}
+          element={<MenuPage foodItems={foodItems} setfoodItems={setfoodItems}/>}
         />
       </Routes>
     </div>
