@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MenuCard from "./MenuCard";
 
-function RestaurantPage( {foodItems, setfoodItems}) {
+function RestaurantPage( {foodItems, setfoodItems, setNavBarName}) {
   const { id } = useParams();
   const [menu, setMenu] = useState([]);
 

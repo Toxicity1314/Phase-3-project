@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 
-function Home() {
+function Home({handleNavBar}) {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
@@ -9,11 +9,12 @@ function Home() {
       .then((r) => r.json())
       .then((restaurantList) => {
         setRestaurants(restaurantList);
+        handleNavBar("Restaurant App")
       });
   }, []);
 
   const restaurantCards = restaurants.map((restaurant) => {
-    return <RestaurantCard key={restaurant.id} restaurant={restaurant} />;
+    return <RestaurantCard handleNavBar={handleNavBar} key={restaurant.id} restaurant={restaurant} />;
   });
 
   console.log(restaurantCards);

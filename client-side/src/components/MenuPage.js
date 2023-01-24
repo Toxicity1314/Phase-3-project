@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import FoodCard from "./FoodCard";
 
@@ -34,8 +33,6 @@ function MenuPage({foodItems, setfoodItems}) {
   const apps = [];
   const entrees = [];
   const desserts = [];
-
-  //console.log(foodItems)
 
   const sortFoodsByCourse = () => {
     let arrayToUpdate

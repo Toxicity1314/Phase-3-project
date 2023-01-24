@@ -10,18 +10,24 @@ import './App.css';
 
 function App() {
   const [foodItems, setfoodItems] = useState([]);
+  const [NavBarName, setNavBarName] = useState("Restaurant App")
+
+  function handleNavBar(name){
+    console.log(name)
+    setNavBarName(name)
+  }
 
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar NavBarName={NavBarName}/>
       <Routes>
         <Route 
           exact path='/'
-          element={<Home/>}
+          element={<Home handleNavBar={handleNavBar}/>}
         />
         <Route
           path="/restaurants/:id"
-          element={<RestaurantPage foodItems={foodItems} setfoodItems={setfoodItems}/>}
+          element={<RestaurantPage  foodItems={foodItems} setfoodItems={setfoodItems}/>}
           />
         <Route
           path="/menu/:id"
