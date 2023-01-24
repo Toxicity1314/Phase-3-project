@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { Card, Button } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, json } from "react-router-dom";
 import EditFood from "./EditFood";
 
-function FoodCard({ food, updateFoodItems }) {
+function FoodCard({ food, updateFoodItems, removeFood }) {
   const [isEditable, setIsEditable] = useState(false);
 
   const editFood = () => {
     setIsEditable(!isEditable);
   };
+
+  const handleDelete = () => {
+    fetch(`http://localhost:9292/food/${food.id}`, {
+      method: 'DELETE'
+    })
+    .then(r => r.json())
+    .then(deletedFood => removeFood(deletedFood))
+  }
 
   return (
     <Card>
@@ -33,6 +41,7 @@ function FoodCard({ food, updateFoodItems }) {
         <Button onClick={editFood}>
           {isEditable ? "Cancel" : "Edit Food"}
         </Button>
+        {!isEditable && <Button onClick={handleDelete} >Delete</Button>}
       </Card.Content>
     </Card>
   );
