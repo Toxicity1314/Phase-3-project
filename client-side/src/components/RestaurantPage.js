@@ -5,6 +5,7 @@ import MenuCard from "./MenuCard";
 function RestaurantPage() {
   const { id } = useParams();
   const [menu, setMenu] = useState([]);
+  const [foodItems, setfoodItems] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:9292/restaurants/${id}`)
@@ -12,8 +13,13 @@ function RestaurantPage() {
       .then((menus) => setMenu(menus));
   }, []);
 
+  const addFood = (newlyAddedFood) => {
+    const updatedFoods = foodItems.push(newlyAddedFood)
+    setfoodItems(updatedFoods)
+  }
+
   const menuCards = menu.map((menu) => {
-    return <MenuCard key={menu.id} menu={menu} />;
+    return <MenuCard addFood={addFood} foodItems={foodItems} setfoodItems={setfoodItems} key={menu.id} menu={menu} />;
   });
 
   return <div>{menuCards}</div>;

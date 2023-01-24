@@ -32,7 +32,6 @@ function EditFood({ food, updateFoodItems, setIsEditable }) {
     setEditFoodForm({ ...editFoodForm, [name]: value });
   };
 
-  console.log(editFoodForm);
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Field>
