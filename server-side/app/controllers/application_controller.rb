@@ -6,20 +6,30 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/restaurants/range/:number/:sort" do
+    hash = {restaurantCount: 0,restaurants:[] }
     number = params[:number].to_i - 1
     sort = params[:sort]
-    restaurants = params[:sort] == "none" ? Restaurant.offset(number*10).limit(10) :
+    hash[:restaurantCount] = Restaurant.count
+    hash[:restaurants] = params[:sort] == "none" ? Restaurant.offset(number*10).limit(10) :
       Restaurant.order("name #{sort}").offset(number*10).limit(10)
-    restaurants.to_json
+    hash.to_json
   end
 
-  get '/restaurants/searchQuery/:searchField/:number/:sort' do
+  get "/count" do
+    number = Restaurant.all.count
+    number.to_json
+  end
+
+  get '/restaurants/range/:number/:sort/:searchField' do
+    hash = {restaurantCount: 0,restaurants:[] }
     sort = params[:sort]
     number = params[:number].to_i - 1
     searchTerm = params[:searchField]
-    restaurants = params[:sort] == "none" ? Restaurant.where("name like ?", "%#{searchTerm}%" ).offset(number*10).limit(10) :
+    hash[:restaurantCount] = Restaurant.where("name like ?", "%#{searchTerm}%").count
+    hash[:restaurants] = params[:sort] == "none" ? Restaurant.where("name like ?", "%#{searchTerm}%" ).offset(number*10).limit(10) :
       Restaurant.where("name like ?", "%#{searchTerm}%" ).order("name #{sort}").offset(number*10).limit(10)
-    restaurants.to_json
+    
+      hash.to_json()
   end
 
   get "/restaurants/:id" do
