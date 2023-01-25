@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import FoodCard from "./FoodCard";
+import { fetchHandler } from "../fetch";
 
 function MenuPage({foodItems, setfoodItems}) {
   const { id } = useParams();
   
 
   useEffect(() => {
-    fetch(`http://localhost:9292/menu/${id}`)
-      .then((r) => r.json())
-      .then((food) => setfoodItems(food));
+    fetchHandler(`menu/${id}`, setfoodItems)
   }, []);
 
   const updateFoodItems = (updatedFood) => {

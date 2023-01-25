@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button } from "semantic-ui-react";
-import { NavLink, Link, json } from "react-router-dom";
 import EditFood from "./EditFood";
+import { fetchHandler } from "../fetch";
 
 function FoodCard({ food, updateFoodItems, removeFood }) {
   const [isEditable, setIsEditable] = useState(false);
@@ -11,11 +11,7 @@ function FoodCard({ food, updateFoodItems, removeFood }) {
   };
 
   const handleDelete = () => {
-    fetch(`http://localhost:9292/food/${food.id}`, {
-      method: 'DELETE'
-    })
-    .then(r => r.json())
-    .then(deletedFood => removeFood(deletedFood))
+    fetchHandler(`food/${food.id}`, removeFood, "DELETE")
   }
 
   return (

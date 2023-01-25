@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
+import { fetchHandler } from "../fetch";
 
 function Home({handleNavBar}) {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9292/restaurants")
-      .then((r) => r.json())
-      .then((restaurantList) => {
-        setRestaurants(restaurantList);
-        handleNavBar("Restaurant App")
-      });
+    fetchHandler(`restaurants`, setRestaurants)
   }, []);
 
   const restaurantCards = restaurants.map((restaurant) => {

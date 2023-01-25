@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
+import { updateHandler } from "../fetch";
 
 function EditFood({ food, updateFoodItems, setIsEditable }) {
   const [editFoodForm, setEditFoodForm] = useState({
@@ -10,18 +11,7 @@ function EditFood({ food, updateFoodItems, setIsEditable }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:9292/food/${food.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editFoodForm),
-    })
-      .then((r) => r.json())
-      .then((updatedFood) => {
-        updateFoodItems(updatedFood);
-        setIsEditable(false);
-      });
+    updateHandler(`food/${food.id}`, updateFoodItems, "PATCH", editFoodForm, setIsEditable)
   };
 
   const handleChange = (e) => {
