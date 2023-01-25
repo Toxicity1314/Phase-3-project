@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import FoodCard from "./FoodCard";
+import { fetchHandler } from "../fetch";
 import { Card } from 'semantic-ui-react'
 
 function MenuPage({foodItems, setfoodItems}) {
@@ -8,9 +9,7 @@ function MenuPage({foodItems, setfoodItems}) {
   
 
   useEffect(() => {
-    fetch(`http://localhost:9292/menu/${id}`)
-      .then((r) => r.json())
-      .then((food) => setfoodItems(food));
+    fetchHandler(`menu/${id}`, setfoodItems)
   }, []);
 
   const updateFoodItems = (updatedFood) => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form } from "semantic-ui-react";
+import { updateHandler} from '../fetch';
 
 function AddFoodForm( { menu, setAddingFood, addFood } ) {
     
@@ -14,18 +15,7 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:9292/food`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(addFoodForm),
-        })
-        .then((r) => r.json())
-        .then((newlyAddedFood) => {
-            addFood(newlyAddedFood);
-            setAddingFood(false);
-        });
+        updateHandler("food", addFood, "POST", addFoodForm, setAddingFood)
       }
 
       const handleChange = (e) => {
@@ -36,7 +26,6 @@ function AddFoodForm( { menu, setAddingFood, addFood } ) {
         }
         setAddFoodForm({ ...addFoodForm, [name]: value });
       }
-      console.log(addFoodForm)
 
     return (
         <Form onSubmit={handleSubmit}>
