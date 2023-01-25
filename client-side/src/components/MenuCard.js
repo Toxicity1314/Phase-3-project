@@ -12,11 +12,12 @@ function MenuCard({ menu, addFood }) {
   }
 
   return (
-    <Card>
+    <Card className="ui container center aligned">
       <Card.Content>
         <Card.Header as={NavLink} to={`/menu/${menu.id}`}>
           {menu.time_of_day}
         </Card.Header>
+        <br/>
         {addingFood && <AddFoodForm addFood={addFood} menu={menu} setAddingFood={setAddingFood}/>}
         <Button onClick={handleAddFood}>{addingFood ? "Cancel" : "Add New Food"}</Button>
       </Card.Content>

@@ -10,11 +10,11 @@ FoodItem.destroy_all
     @lunch = Menu.create(time_of_day: "lunch", restaurant: restaurant)
     @dinner = Menu.create(time_of_day: "dinner", restaurant: restaurant)
 
-    20.times do
+    40.times do
         array = [@breakfast, @lunch, @dinner]
         name = Faker::Food.dish
         description = Faker::Food.description
-        price = rand(1..100)
+        price = rand(1..40)
         menu = array[rand(array.length)] 
         food_course_array = ['appetizer','entree','dessert']
         food_course = food_course_array[rand(food_course_array.length)]
@@ -22,11 +22,5 @@ FoodItem.destroy_all
         FoodItem.create(name: name ,price: price , description: description , menu: menu, food_course: food_course)
     end
 end
-
-
-
-
-
-
 
 puts "✅ Done seeding!"

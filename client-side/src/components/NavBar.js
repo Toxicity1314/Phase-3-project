@@ -7,8 +7,10 @@ function NavBar({NavBarName}) {
 
   return( 
   <div>
-      {window.location.pathname !== "/" && <Button onClick={()=>navigate("/")}>back to home</Button>}
-      <h1>{NavBarName}</h1>
+    <br/>
+    {window.location.pathname !== "/" && <Button onClick={()=>navigate("/")}>back to home</Button>}
+    <br/>
+    <h1>{NavBarName}</h1>
   </div>
 )}
 

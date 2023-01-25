@@ -15,7 +15,13 @@ function Home({handleNavBar}) {
 
   console.log(restaurantCards);
 
-  return <div>{restaurantCards}</div>;
+  return (
+    <div className="ui container center aligned">
+      <br/>
+      <p>Please select where you will be dining to view menus.</p>
+      <br/>
+      {restaurantCards}
+    </div>)
 }
 
 export default Home;

@@ -4,7 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 
 function RestaurantCard({ restaurant, handleNavBar }) {
   return (
-    <Card>
+    <Card className="ui container center aligned">
       <Card.Content>
         <Card.Header 
           as={NavLink}
