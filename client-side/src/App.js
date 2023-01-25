@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import NavBar from "./components/NavBar"
 import Home from "./components/Home"
 import MenuPage from './components/MenuPage';
+import { Pagination } from 'semantic-ui-react';
 import RestaurantPage from './components/RestaurantPage';
 
 import './App.css';
@@ -21,10 +22,6 @@ function App() {
     <div className="App">
       <NavBar NavBarName={NavBarName}/>
       <Routes>
-        <Route 
-          exact path='/'
-          element={<Home handleNavBar={handleNavBar}/>}
-        />
         <Route
           path="/restaurants/:id"
           element={<RestaurantPage  foodItems={foodItems} setfoodItems={setfoodItems}/>}
@@ -32,6 +29,10 @@ function App() {
         <Route
           path="/menu/:id"
           element={<MenuPage foodItems={foodItems} setfoodItems={setfoodItems}/>}
+        />
+        <Route 
+          path="/"
+          element={<Home handleNavBar={handleNavBar}/>}
         />
       </Routes>
     </div>
