@@ -5,36 +5,60 @@ import { Pagination, Form, Button } from "semantic-ui-react";
 import { fetchHandler } from "../fetch";
 
 
-function Home({handleNavBar}) {
-  const { pageNumber } = useParams(0);
-  
+function Home({handleNavBar}) {  
   const [restaurants, setRestaurants] = useState([]);
   const [activePage, setActivePage] = useState(1)
   const [sort, setSort] = useState("none")
   const [searchField, setSearchField] = useState("")
+  const [pages, setPages] = useState(0)
 
   const handlePaginationChange = (e, {activePage})=>{
     setActivePage(activePage)
   }
-  useEffect(() => {    
-    fetchHandler(`restaurants/range/${activePage}/${sort}`, setRestaurants)
-  }, [activePage, sort]);
+  console.log(`active page ${activePage}`)
+  useEffect(()=>{
+    fetch(`http://localhost:9292/count`)
+        .then((r) => r.json())
+        .then(data => {
+          setPages(data)
+        })
+  },[])
+
+  useEffect(() => {
+    let search = searchField === "" ? "": `/${searchField}`
+    fetch(`http://localhost:9292/restaurants/range/${activePage}/${sort}${search}`)
+        .then((r) => r.json())
+        .then(data => {
+          setRestaurants(data.restaurants)
+          setPages(data.restaurantCount)
+        })
+    //fetchHandler(`restaurants/range/${activePage}/${sort}${search}`, setRestaurants)
+    
+  }, [activePage, sort])
+
 
   const restaurantCards = restaurants.map((restaurant) => {
     return <RestaurantCard handleNavBar={handleNavBar} key={restaurant.id} restaurant={restaurant} />;
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setActivePage(1)
-    fetchHandler(`restaurants/searchQuery/${searchField}/1/${sort}`, setRestaurants)
-    setSearchField("")
+    e.preventDefault() 
+    let search = searchField === "" ? "": `/${searchField}`
+    fetch(`http://localhost:9292/restaurants/range/${activePage}/${sort}${search}`)
+    .then((r) => r.json())
+    .then(data => {
+      setRestaurants(data.restaurants)
+      setPages(data.restaurantCount)
+      setActivePage(1)
+    })
+    //fetchHandler(`restaurants/range/1/${sort}${search}`, setRestaurants)
   }
 
   const handleChange = (e) => {
     setSearchField(e.target.value)
-  }
 
+  }
+  
   return (
     <div className="ui container center aligned">
       <br/>
@@ -61,7 +85,7 @@ function Home({handleNavBar}) {
       <Pagination
         activePage={activePage}
         onPageChange={handlePaginationChange}
-        totalPages={10}
+        totalPages={pages/10 > 1 ? Math.ceil(pages/10) : 1}
       />
     </div>)
 }
