@@ -7,9 +7,18 @@ class ApplicationController < Sinatra::Base
   # Add your routes here
   get "/restaurants/range/:number/:sort" do
     number = params[:number].to_i - 1
-    sort = params[:sort] == "ASC" ? "ASC" : "DESC" 
+    sort = params[:sort]
     restaurants = params[:sort] == "none" ? Restaurant.offset(number*10).limit(10) :
       Restaurant.order("name #{sort}").offset(number*10).limit(10)
+    restaurants.to_json
+  end
+
+  get '/restaurants/searchQuery/:searchField/:number/:sort' do
+    sort = params[:sort]
+    number = params[:number].to_i - 1
+    searchTerm = params[:searchField]
+    restaurants = params[:sort] == "none" ? Restaurant.where("name like ?", "%#{searchTerm}%" ).offset(number*10).limit(10) :
+      Restaurant.where("name like ?", "%#{searchTerm}%" ).order("name #{sort}").offset(number*10).limit(10)
     restaurants.to_json
   end
 
