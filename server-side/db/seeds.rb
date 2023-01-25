@@ -4,7 +4,7 @@ Restaurant.destroy_all
 Menu.destroy_all
 FoodItem.destroy_all
 
-5.times do
+100.times do
     restaurant =Restaurant.create(name: Faker::Restaurant.name)
     @breakfast = Menu.create(time_of_day: "breakfast", restaurant: restaurant)
     @lunch = Menu.create(time_of_day: "lunch", restaurant: restaurant)

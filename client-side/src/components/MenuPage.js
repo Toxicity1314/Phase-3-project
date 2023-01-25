@@ -58,13 +58,13 @@ function MenuPage({foodItems, setfoodItems}) {
       <h2>Apps</h2>
       <br/>
       <Card.Group className="ui container center aligned">{apps}</Card.Group>
-      <div class="ui section divider"></div>
+      <div className="ui section divider"></div>
       <h2>Entrees</h2>
       <Card.Group className="ui container center aligned">{entrees}</Card.Group>
-      <div class="ui section divider"></div>
+      <div className="ui section divider"></div>
       <h2>Desserts</h2>
       <Card.Group className="ui container center aligned">{desserts}</Card.Group>
-      <div class="ui section divider"></div>
+      <div className="ui section divider"></div>
     </div>
   );
 }

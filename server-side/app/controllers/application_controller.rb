@@ -2,17 +2,20 @@ require 'pry'
 
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
+  @page = 0
   
   # Add your routes here
-  get "/restaurants" do
-    restaurants = Restaurant.all
+  get "/restaurants/range/:number/:sort" do
+    number = params[:number].to_i - 1
+    sort = params[:sort] == "ASC" ? "ASC" : "DESC" 
+    restaurants = params[:sort] == "none" ? Restaurant.offset(number*10).limit(10) :
+      Restaurant.order("name #{sort}").offset(number*10).limit(10)
     restaurants.to_json
   end
 
   get "/restaurants/:id" do
     restaurant = Restaurant.find(params[:id])
     restaurant.menus.to_json
-    # restaurant.to_json(include: {menus: {include: {food_items:{}}}})
   end
 
   get "/menu/:id" do
