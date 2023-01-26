@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar NavBarName={NavBarName} />
+      <NavBar NavBarName={NavBarName} setNavBarName={setNavBarName} />
       <Routes>
         <Route
           path="/restaurants/:id"
