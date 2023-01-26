@@ -11,8 +11,8 @@ function FoodCard({ food, updateFoodItems, removeFood }) {
   };
 
   const handleDelete = () => {
-    fetchHandler(`food/${food.id}`, removeFood, "DELETE")
-  }
+    fetchHandler({ url: `food/${food.id}`, set: removeFood, method: "DELETE" });
+  };
 
   return (
     <Card>
@@ -37,7 +37,7 @@ function FoodCard({ food, updateFoodItems, removeFood }) {
         <Button onClick={editFood}>
           {isEditable ? "Cancel" : "Edit Food"}
         </Button>
-        {!isEditable && <Button onClick={handleDelete} >Delete</Button>}
+        {!isEditable && <Button onClick={handleDelete}>Delete</Button>}
       </Card.Content>
     </Card>
   );

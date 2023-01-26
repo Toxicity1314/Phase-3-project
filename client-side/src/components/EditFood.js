@@ -11,7 +11,13 @@ function EditFood({ food, updateFoodItems, setIsEditable }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateHandler(`food/${food.id}`, updateFoodItems, "PATCH", editFoodForm, setIsEditable)
+    updateHandler(
+      `food/${food.id}`,
+      updateFoodItems,
+      "PATCH",
+      editFoodForm,
+      setIsEditable
+    );
   };
 
   const handleChange = (e) => {
