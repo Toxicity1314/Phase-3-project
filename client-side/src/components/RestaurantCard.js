@@ -6,10 +6,11 @@ function RestaurantCard({ restaurant, handleNavBar }) {
   return (
     <Card className="ui container center aligned">
       <Card.Content>
-        <Card.Header 
+        <Card.Header
           as={NavLink}
           to={`/restaurants/${restaurant.id}`}
-          onClick={()=>handleNavBar(restaurant.name)}>
+          onClick={() => handleNavBar(restaurant.name)}
+        >
           {restaurant.name}
         </Card.Header>
       </Card.Content>

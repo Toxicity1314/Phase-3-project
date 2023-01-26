@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Card, Button } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AddFoodForm from "./AddFoodForm";
 
 function MenuCard({ menu, addFood }) {
-
-  const [addingFood, setAddingFood] = useState(false)
+  const [addingFood, setAddingFood] = useState(false);
 
   const handleAddFood = () => {
-    setAddingFood(!addingFood)
-  }
+    setAddingFood(!addingFood);
+  };
 
   return (
     <Card className="ui container center aligned">
@@ -17,9 +16,17 @@ function MenuCard({ menu, addFood }) {
         <Card.Header as={NavLink} to={`/menu/${menu.id}`}>
           {menu.time_of_day}
         </Card.Header>
-        <br/>
-        {addingFood && <AddFoodForm addFood={addFood} menu={menu} setAddingFood={setAddingFood}/>}
-        <Button onClick={handleAddFood}>{addingFood ? "Cancel" : "Add New Food"}</Button>
+        <br />
+        {addingFood && (
+          <AddFoodForm
+            addFood={addFood}
+            menu={menu}
+            setAddingFood={setAddingFood}
+          />
+        )}
+        <Button onClick={handleAddFood}>
+          {addingFood ? "Cancel" : "Add New Food"}
+        </Button>
       </Card.Content>
     </Card>
   );

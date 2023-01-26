@@ -1,33 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MenuCard from "./MenuCard";
-import {fetchHandler} from"../fetch";
+import { fetchHandler } from "../fetch";
 
-function RestaurantPage( {foodItems, setfoodItems, setNavBarName}) {
+function RestaurantPage({ foodItems, setfoodItems, setNavBarName }) {
   const { id } = useParams();
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-   fetchHandler(`restaurants/${id}`, setMenu)
+    fetchHandler({ url: `restaurants/${id}`, set: setMenu });
   }, []);
 
   const addFood = (newlyAddedFood) => {
-    setfoodItems([...foodItems,newlyAddedFood])
-  }
+    setfoodItems([...foodItems, newlyAddedFood]);
+  };
 
   const menuCards = menu.map((menu) => {
-    return <MenuCard addFood={addFood} foodItems={foodItems} setfoodItems={setfoodItems} key={menu.id} menu={menu} />;
+    return (
+      <MenuCard
+        addFood={addFood}
+        foodItems={foodItems}
+        setfoodItems={setfoodItems}
+        key={menu.id}
+        menu={menu}
+      />
+    );
   });
 
   return (
     <div className="ui container center aligned">
-      <br/>
+      <br />
       <p>Excellent choice! What time of day will you be dining?</p>
-      <p>If you're the owner of this restaurant, feel free to add a new food item!</p>
-      <p>If you aren't the owner, please ignore the add food button while our developers tirelessly work to implement user authentication.</p>
-      <br/>
+      <p>
+        If you're the owner of this restaurant, feel free to add a new food
+        item!
+      </p>
+      <p>
+        If you aren't the owner, please ignore the add food button while our
+        developers tirelessly work to implement user authentication.
+      </p>
+      <br />
       {menuCards}
-    </div>)
+    </div>
+  );
 }
 
 export default RestaurantPage;
