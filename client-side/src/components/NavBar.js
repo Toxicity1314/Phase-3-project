@@ -14,7 +14,11 @@ function NavBar({ NavBarName, setNavBarName }) {
     <div>
       <br />
       {window.location.pathname !== "/" && (
-        <Button onClick={handleClick}>back to home</Button>
+        <Button onClick={() => {
+          navigate("/")
+          setNavBarName("Restaurant App")
+        }}>back to home</Button>
+
       )}
       <br />
       <h1>{NavBarName}</h1>
