@@ -2,26 +2,19 @@ require 'pry'
 
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
-  @page = 0
   
   # Add your routes here
   get "/restaurants/range/:number/:sort" do
-    hash = {restaurantCount: 0,restaurants:[] }
+    hash = {restaurantCount: Restaurant.count, restaurants:[] }
     number = params[:number].to_i - 1
     sort = params[:sort]
-    hash[:restaurantCount] = Restaurant.count
     hash[:restaurants] = params[:sort] == "none" ? Restaurant.offset(number*10).limit(10) :
       Restaurant.order("name #{sort}").offset(number*10).limit(10)
     hash.to_json
   end
 
-  get "/count" do
-    number = Restaurant.all.count
-    number.to_json
-  end
-
   get '/restaurants/range/:number/:sort/:searchField' do
-    hash = {restaurantCount: 0,restaurants:[] }
+    hash = {restaurantCount: 0 ,restaurants:[] }
     sort = params[:sort]
     number = params[:number].to_i - 1
     searchTerm = params[:searchField]
@@ -29,17 +22,15 @@ class ApplicationController < Sinatra::Base
     hash[:restaurants] = params[:sort] == "none" ? Restaurant.where("name like ?", "%#{searchTerm}%" ).offset(number*10).limit(10) :
       Restaurant.where("name like ?", "%#{searchTerm}%" ).order("name #{sort}").offset(number*10).limit(10)
     
-      hash.to_json()
+    hash.to_json()
   end
 
   get "/restaurants/:id" do
-    restaurant = Restaurant.find(params[:id])
-    restaurant.menus.to_json
+    Restaurant.find(params[:id]).menus.to_json
   end
 
   get "/menu/:id" do
-    menu = Menu.find(params[:id])
-    menu.food_items.to_json
+    Menu.find(params[:id]).food_items.to_json
   end
 
   patch '/food/:id' do

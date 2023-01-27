@@ -5,6 +5,11 @@ import { Button } from "semantic-ui-react";
 function NavBar({ NavBarName, setNavBarName }) {
   const navigate = useNavigate();
 
+  const handleClick = ()=>{
+    navigate("/")
+    setNavBarName("Restaurant App")
+  }
+
   return (
     <div>
       <br />
@@ -13,6 +18,7 @@ function NavBar({ NavBarName, setNavBarName }) {
           navigate("/")
           setNavBarName("Restaurant App")
         }}>back to home</Button>
+
       )}
       <br />
       <h1>{NavBarName}</h1>
